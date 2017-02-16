@@ -1,0 +1,52 @@
+<hr>
+<br>
+<br>
+
+<form [formGroup]="form" (ngSubmit)="getData($event)">
+  <label for="deviceID">Device ID</label>
+  <input formControlName="deviceID" type="text" name="deviceID" placeholder="Enter Device ID">
+  <button type="submit" [disabled]="!form.valid">View Data</button>
+</form>
+<section *ngIf="flag">
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Creation Time</th>
+          <th>Analog A0</th>
+          <th>Analog A1</th>
+          <th>Analog A4</th>
+          <th>Analog A3</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <tr *ngFor="let deviceData of data; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{deviceData.CreatedDateTime}}</td>
+          <td>{{deviceData.ValueA}}</td>
+          <td>{{deviceData.ValueB}}</td>
+          <td>{{deviceData.ValueC}}</td>
+          <td>{{deviceData.ValueD}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<div *ngIf="!flag">
+  <p> Please Enter Valid Device ID.</p>
+  <button (click)="toggle()"> Check Valid Device ID</button>
+  <div *ngIf="show">
+    <p> So far I have posted data to following Device IDs</p>
+    <ul>
+      <li>35</li>
+      <li>135</li>
+      <li>1235</li>
+    </ul>
+    <p> We have to creace read call so we can read Device ID from Database.</p>
+  </div>
+</div>
