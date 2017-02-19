@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DeviceDataService } from '../../device-data.service';
+import { DeviceDataService } from '../../service/device-data.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
@@ -13,11 +13,20 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class DeviceDataComponent implements OnInit {
   form;
   data;
+  deviceList;
   list = [];
   flag: boolean = false;
   show: boolean = false;
 
-  constructor(private deviceDataService: DeviceDataService) { }
+  constructor(private deviceDataService: DeviceDataService) {
+    this.getDeviceList();
+  }
+  getDeviceList() {
+    this.deviceDataService.getDevices('').subscribe(x => {
+      this.deviceList = x;
+      console.log(this.deviceList);
+    })
+  }
   getData(event) {
     this.deviceDataService.getFilterDevices(this.form.value.deviceID).subscribe(x => {
       this.data = x;
@@ -27,14 +36,11 @@ export class DeviceDataComponent implements OnInit {
       }
     });
   }
-toggle(){
-  this.show = !this.show;
-}
 
-ngOnInit() {
-  this.form = new FormGroup({
-    deviceID: new FormControl('', Validators.compose([Validators.required])),
-  })
-}
+  ngOnInit() {
+    this.form = new FormGroup({
+      deviceID: new FormControl('', Validators.compose([Validators.required])),
+    })
+  }
 
 }
