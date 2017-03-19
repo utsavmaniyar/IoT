@@ -3,39 +3,57 @@
 <br>
 
 <form [formGroup]="form" (ngSubmit)="getData($event)">
-  <label for="deviceID">Please Select Device ID</label>
-  <select formControlName="deviceID" type="text" name="deviceID">
+    <label for="deviceID">Please Select Device ID</label>
+    <select formControlName="deviceID" type="text" name="deviceID">
       <option *ngFor = "let list of deviceList" value="{{list}}">{{list}}</option>
   </select>
-  <button type="submit" [disabled]="!form.valid">View Data</button>
+    <select formControlName="displayType" type="text" name="displayType">
+      <option value="chart">Graph</option>
+      <option value="table">Table</option>
+  </select>
+    <button type="submit" [disabled]="!form.valid">View Data</button>
 </form>
-<section *ngIf="flag">
-  <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Creation Time</th>
-          <th>Analog A0</th>
-          <th>Analog A1</th>
-          <th>Analog A4</th>
-          <th>Analog A3</th>
-        </tr>
-      </thead>
-    </table>
-  </div>
-  <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <tbody>
-        <tr *ngFor="let deviceData of data; let i = index">
-          <td>{{i+1}}</td>
-          <td>{{deviceData.CreatedDateTime}}</td>
-          <td>{{deviceData.ValueA}}</td>
-          <td>{{deviceData.ValueB}}</td>
-          <td>{{deviceData.ValueC}}</td>
-          <td>{{deviceData.ValueD}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+
+
+<section *ngIf="display_table">
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Creation Time</th>
+                    <th>Analog A0</th>
+                    <th>Analog A1</th>
+                    <th>Analog A4</th>
+                    <th>Analog A3</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                <tr *ngFor="let deviceData of data; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{deviceData.CreatedDateTime}}</td>
+                    <td>{{deviceData.ValueA}}</td>
+                    <td>{{deviceData.ValueB}}</td>
+                    <td>{{deviceData.ValueC}}</td>
+                    <td>{{deviceData.ValueD}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </section>
+
+<div *ngIf="display_chart">
+    <div class="row">
+        <div class="col-md-6">
+            <div style="display: block;">
+            <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+            [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
