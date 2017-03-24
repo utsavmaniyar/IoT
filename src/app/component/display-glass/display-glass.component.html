@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="getData($event)">
+    <label for="deviceID">Please Select Device ID</label>
+    <select formControlName="deviceID" type="text" name="deviceID">
+      <option *ngFor = "let list of deviceList" value="{{list}}">{{list}}</option>
+  </select>
+    <button type="submit" [disabled]="!form.valid">View Data</button>
+</form>
+
+<div id="loader">
+    <div id="glass">
+        <div id="drink"></div>
+        <span id="counter">{{glassValue/10}} %</span>
+    </div>
+    <div id="coaster"></div>
+</div>
+
+<footer>Please wait while<br>we fill up your glass...</footer>

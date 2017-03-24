@@ -1,0 +1,45 @@
+* { box-sizing: border-box; }
+
+
+#loader {
+    height:200px;
+    width:100px;
+}
+
+#glass {
+    position: relative;
+    height: 100%;
+    background: rgba(255,255,255,.1);
+    border-radius: 0% 0% 15% 15%;
+    border: 3px solid;
+    border-top: 0;
+    border-bottom: 20px solid;
+    border-color: rgba(25,25,25,.7);
+    overflow: hidden;
+}
+#drink {
+    position: absolute;
+    top:100%; right:0; bottom:0; left:0;
+    background: linear-gradient(to bottom, orange, orangered);
+    box-shadow: inset 0 2px 1px rgba(255,69,0,.2);
+    opacity: .7;
+}
+#counter {
+    position: relative;
+    line-height: 200px;
+    font-size: 22px;
+    left: 25px;
+    color: rgba(25,25,25,1);
+}
+
+#coaster {
+    width: 130%; height: 4px;
+    margin-left: -15%;
+    background: steelblue;
+    border-radius: 2px;
+}
+
+footer {
+    margin-top: 20px;
+    color: steelblue;
+}

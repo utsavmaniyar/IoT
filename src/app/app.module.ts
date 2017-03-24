@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { DeviceDataComponent } from './component/device-data/device-data.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { DisplayGlassComponent } from './component/display-glass/display-glass.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DeviceDataComponent,
     OrderByPipe,
+    DisplayGlassComponent,
   ],
   imports: [
     BrowserModule,
